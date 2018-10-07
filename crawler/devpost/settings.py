@@ -14,6 +14,14 @@ BOT_NAME = 'devpost'
 SPIDER_MODULES = ['devpost.spiders']
 NEWSPIDER_MODULE = 'devpost.spiders'
 
+DATABASE = {
+    'drivername': 'sqlite',
+    # 'host': 'localhost',
+    # 'port': '5432',
+    # 'username': 'YOUR_USERNAME',
+    # 'password': 'YOUR_PASSWORD',
+    'database': 'devpost.sqlite'
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'devpost (+http://www.yourdomain.com)'
@@ -64,9 +72,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'devpost.pipelines.DevpostPipeline': 300,
-#}
+ITEM_PIPELINES = {
+    'devpost.pipelines.SqlitePipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
