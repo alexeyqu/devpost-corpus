@@ -29,6 +29,7 @@ class Project(DeclarativeBase):
 	text = Column('text', String)
 	builtwith = Column('builtwith', String)
 	likes = Column('likes', Integer)
+	winner = Column('winner', String)
 	# developers = Column('developers', String)
 	# created_by = Column('created_by', String)
 

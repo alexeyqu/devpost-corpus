@@ -61,6 +61,7 @@ class ProjectsSpider(CrawlSpider):
             '//span[@class="side-count"]/text()'
         )
         # loader.add_xpath('developers', '//h1[@id="app-title"]/text()')
-        # loader.add_xpath('created_by', '//h1[@id="app-title"]/text()')
+        # loader.add_xpath('developers', '//h1[@id="app-title"]/text()')
+        loader.add_xpath('winner', '//span[contains(@class, "winner")]/text()')
 
         return loader.load_item()

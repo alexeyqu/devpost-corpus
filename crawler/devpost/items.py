@@ -20,4 +20,5 @@ class ProjectItem(scrapy.Item):
     likes = scrapy.Field()
     developers = scrapy.Field()
     created_by = scrapy.Field()
+    winner = scrapy.Field()
 
