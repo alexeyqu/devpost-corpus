@@ -18,6 +18,8 @@ Currently (as of 11 Oct 2018) there are 99665 project pages, 11171 of them are m
 
 The corpus contains projects in English (about 80%), Spanish, Arabic, Russian, Chinese and some others (TODO: accurate statistics and mark the entries of each language).
 
+Mean text length: 11 (sentences, [nltk.punkt](https://github.com/mhq/train_punkt)), 235 (words, `nltk.tokenize.RegexTokenizer('\w+')`), 1387 (symbols).
+
 # Metadata
 
 Data | Description | Example
