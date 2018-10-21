@@ -31,7 +31,7 @@ class Tagger(object):
             tokens = []
             sents_coords = self.sent_tokenizer.span_tokenize(project.text)
             for i in range(len(sents_coords) - 1):
-                tokens.append(Token(project_id=project.id, start=sents_coords[i][1] - 1, end=sents_coords[i+1][0], pos='<EOS>'))
+                tokens.append(Token(project_id=project.id, start=sents_coords[i][1], end=sents_coords[i+1][0], pos='<EOS>'))
             tokens.append(Token(project_id=project.id, start=sents_coords[-1][1], end=len(project.text), pos='<EOS>'))
             
             for sent_coords in sents_coords:
