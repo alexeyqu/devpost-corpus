@@ -14,27 +14,9 @@ from sqlalchemy.pool import NullPool
 from scrapy.exceptions import DropItem
 from scrapy import signals
 from devpost.items import ProjectItem
+from schema.tables import Project, DeclarativeBase
 
 logger = logging.getLogger(__name__)
-
-DeclarativeBase = declarative_base()
-
-class Project(DeclarativeBase):
-	__tablename__ = 'projects'
-
-	url = Column('url', String, primary_key=True)
-	title = Column('title', String)
-	headline = Column('headline', Integer)
-	hackathon = Column('hackathon', String)
-	text = Column('text', String)
-	builtwith = Column('builtwith', String)
-	likes = Column('likes', Integer)
-	winner = Column('winner', String)
-	# developers = Column('developers', String)
-	# created_by = Column('created_by', String)
-
-	def __repr__(self):
-		return "<Project({0})>".format(self.title)
 
 
 class SqlitePipeline(object):
