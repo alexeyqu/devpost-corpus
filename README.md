@@ -12,7 +12,7 @@ This corpus contains project descriptions and metadata.
 
 ## About the corpus
 
-Data is stored in SQLite database (planning to switch to Redis) and is crawled with Scrapy framework.
+Data is stored in SQLite database (planning to switch to Redis) and is crawled with Scrapy framework. Project descriptions in corpus are splitted by sentences, tokenized and have POS-tags (currently only English descriptions) where appliable.
 
 Currently (as of 11 Oct 2018) there are 99665 project pages, 11171 of them are marked as winners.
 
@@ -32,6 +32,21 @@ Data | Description | Example
 **builtwith** | List of technologies used to build the projects | `javascript html twilio`
 **likes** | Number of likes | `2`
 **winner** | If the project won the hackathon | `Winner`
+
+# Collecting and processing
+
+### Crawling
+
+```bash
+$ python main.py crawler
+```
+
+### Tokenizing and tagging
+
+
+```bash
+$ python main.py tagger
+```
 
 # Fun facts
 
