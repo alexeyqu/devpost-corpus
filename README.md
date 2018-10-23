@@ -12,7 +12,7 @@ This corpus contains project descriptions and metadata.
 
 ## About the corpus
 
-Data is stored in SQLite database (planning to switch to Redis) and is crawled with Scrapy framework. Project descriptions in corpus are splitted by sentences, tokenized and have POS-tags (currently only English descriptions) where appliable.
+Data is stored in SQLite database (planning to switch to Redis) and is crawled with Scrapy framework. Project descriptions in corpus are splitted by sentences, tokenized and (currently only English descriptions) have POS-tags where appliable ([Penn Treebank POS Tags](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)), tokenization data is stored in the SQLite database too.
 
 Currently (as of 11 Oct 2018) there are 99665 project pages, 11171 of them are marked as winners.
 
