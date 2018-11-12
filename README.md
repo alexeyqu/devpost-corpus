@@ -55,11 +55,11 @@ The corpus was indexed (took 6min 49s) with Solr engine running in cloud mode (2
 This corpus is quite small for Solr, because it shows little improvement compared to `re.findall` in Python.
 Some statistics (see .ipynb for details):
 
-Query | Solr (ms) | Solr + curl turnaround time (ms) | re.findall (ms) | % of documents
---- | --- | --- | --- | ---
-Inspiration | 14 | 145 | 24 | 50
-python | 7 | 143 | 40 | 5
-*a* | 70 | 209 | 78 | 100
+Query | Solr (ms) | Solr + curl turnaround time (ms) | re.findall (ms) | SQLite like (ms) | % of documents
+--- | --- | --- | --- | --- | ---
+Inspiration | 14 | 145 | 24 | 587 | 50
+python | 7 | 143 | 40 | 627 | 5
+*a* | 70 | 209 | 78 | 361 | 100
 
 The main Solr's strength is scalability and persistence, so it may be used with profit on LARGE corpora (like Wikipedia) and in production environments.
 
