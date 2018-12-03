@@ -25,14 +25,23 @@ class Tagger(object):
         
         DeclarativeBase.metadata.create_all(engine, checkfirst=True)
         
+        logger.warn('clearing tokens table')
+        session.query(Token).delete() # remove old tokens # .filter(Token.project_id == project.id)
         projects = session.query(Project.id, Project.text).all()
+        tokens = []
         
+        BATCH_SIZE = 2000
+        batch_row = 1
         for project in projects:
-            tokens = []
+            if project.text is None:
+                logger.warn('project #{} has empty descritpion, unable to tokenize'.format(project.id))
+                continue
+            old_tagged = len(tokens)
             sents_coords = self.sent_tokenizer.span_tokenize(project.text)
             for i in range(len(sents_coords) - 1):
                 tokens.append(Token(project_id=project.id, start=sents_coords[i][1], end=sents_coords[i+1][0], pos='<EOS>'))
-            tokens.append(Token(project_id=project.id, start=sents_coords[-1][1], end=len(project.text), pos='<EOS>'))
+            if len(sents_coords) > 0:
+                tokens.append(Token(project_id=project.id, start=sents_coords[-1][1], end=len(project.text), pos='<EOS>'))
             
             for sent_coords in sents_coords:
                 sent = project.text[sent_coords[0]:sent_coords[1]]
@@ -46,11 +55,17 @@ class Tagger(object):
                         tokens.append(Token(project_id=project.id, pos=pos,
                             start=(sent_coords[0] + i), end=(sent_coords[0] + i + len(word))))
             
-            session = sessionmaker(bind=engine)()
-            session.query(Token).filter(Token.project_id == project.id).delete() # remove old tokens
-            session.add_all(tokens)
-            session.commit()
-            logger.info('tagged {} tokens for project #{}'.format(len(tokens), project.id))
+            logger.warn('tagged {} tokens for project #{}'.format(len(tokens) - old_tagged, project.id))
+            if batch_row % BATCH_SIZE == 0:
+                logger.warn('committing batch')
+                session.add_all(tokens)
+                session.commit()
+                tokens = []
+            batch_row += 1
+
         
+        logger.warn('committing the last batch')
+        session.add_all(tokens)
+        session.commit()
         session.close()
 
